@@ -56,7 +56,12 @@ static NSString *const ReuseIdentifier = @"weatherCell";
     [self.view addSubview:weatherLabel];
 
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.38 green:0.52 blue:0.92 alpha:1];
+    //background
+    CAGradientLayer *gradient =  [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0.49 green:0.93 blue:0.73 alpha:1]CGColor],(id)[[UIColor colorWithRed:0.38 green:0.52 blue:0.92 alpha:1]CGColor], nil];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    //self.view.backgroundColor = [UIColor colorWithRed:0.38 green:0.52 blue:0.92 alpha:1];
     //
     
     //clearLabel
@@ -73,6 +78,7 @@ static NSString *const ReuseIdentifier = @"weatherCell";
     tempLabel.textColor = [UIColor whiteColor];
     tempLabel.font = [UIFont systemFontOfSize:22 weight:UIFontWeightThin];
     tempLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    tempLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:tempLabel];
     
     //dateLabel
@@ -116,17 +122,18 @@ static NSString *const ReuseIdentifier = @"weatherCell";
     [NSLayoutConstraint constraintWithItem:weatherLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0].active = YES;
     
     //clearLabel
-    [NSLayoutConstraint constraintWithItem:clearLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:30].active = YES;
+    [NSLayoutConstraint constraintWithItem:clearLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:20].active = YES;
     [NSLayoutConstraint constraintWithItem:clearLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:weatherLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:10].active = YES;
     
     //tempLabel
-    [NSLayoutConstraint constraintWithItem:tempLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:-20].active = YES;
+    [NSLayoutConstraint constraintWithItem:tempLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:0].active = YES;
+    [NSLayoutConstraint constraintWithItem:tempLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:dateLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0].active = YES;
     [NSLayoutConstraint constraintWithItem:tempLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:weatherLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:10].active = YES;
     
     //dateLabel
     [NSLayoutConstraint constraintWithItem:dateLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:tempLabel attribute:NSLayoutAttributeBottom multiplier:1.0 constant:5].active = YES;
     [NSLayoutConstraint constraintWithItem:dateLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:-20].active = YES;
-    [NSLayoutConstraint constraintWithItem:dateLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:tempLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0].active = YES;
+//    [NSLayoutConstraint constraintWithItem:dateLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:tempLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0].active = YES;
     
     //tableConstraints
     [NSLayoutConstraint constraintWithItem:tabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0].active = YES;
@@ -172,7 +179,7 @@ static NSString *const ReuseIdentifier = @"weatherCell";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 8;
 }
 /*
 #pragma mark - Navigation
