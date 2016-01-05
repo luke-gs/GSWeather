@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
+    <entity name="Day" representedClassName="Day" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="precipProbabilty" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sunrise" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sunset" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="tempMax" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="tempMin" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="Time" representedClassName="Time" syncable="YES">
+        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="precipProbablility" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Weather" representedClassName="Weather" syncable="YES">
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="timeZone" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="currentTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Time" syncable="YES"/>
+        <relationship name="dailyWeather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Day" syncable="YES"/>
+        <relationship name="hourlyWeather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Time" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Day" positionX="313" positionY="194" width="128" height="165"/>
+        <element name="Time" positionX="99" positionY="-207" width="128" height="118"/>
+        <element name="Weather" positionX="-182" positionY="-127" width="128" height="148"/>
+    </elements>
+</model>
