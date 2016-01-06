@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5747BC71C16FD482827309A6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24EF71F560A29DE1C8B1984F /* libPods.a */; };
+		A31F86EF1C3C7D5A00033745 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A31F86EE1C3C7D5A00033745 /* NetworkManager.m */; };
+		A31F86F21C3C88BE00033745 /* WeatherLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A31F86F11C3C88BE00033745 /* WeatherLocationManager.m */; };
 		A32D64CC1C3B438F002E9DC3 /* GSWeatherModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A32D64CA1C3B438F002E9DC3 /* GSWeatherModel.xcdatamodeld */; };
 		A32D64FD1C3B4AF6002E9DC3 /* Weather+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A32D64F21C3B4AF6002E9DC3 /* Weather+CoreDataProperties.m */; };
 		A32D64FE1C3B4AF6002E9DC3 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = A32D64F41C3B4AF6002E9DC3 /* Weather.m */; };
@@ -31,6 +33,11 @@
 		1F871C4A0311EACA715D5069 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		24EF71F560A29DE1C8B1984F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8DEE91209F56887AEF1EC5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A31F86ED1C3C7D5A00033745 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		A31F86EE1C3C7D5A00033745 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		A31F86F01C3C88BE00033745 /* WeatherLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherLocationManager.h; sourceTree = "<group>"; };
+		A31F86F11C3C88BE00033745 /* WeatherLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherLocationManager.m; sourceTree = "<group>"; };
+		A31F86F31C3C8FD900033745 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A32D64CB1C3B438F002E9DC3 /* GSWeatherModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GSWeatherModel.xcdatamodel; sourceTree = "<group>"; };
 		A32D64F11C3B4AF6002E9DC3 /* Weather+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Weather+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A32D64F21C3B4AF6002E9DC3 /* Weather+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Weather+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -159,10 +166,14 @@
 		A388CA8D1C3A28D80083EE8C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A31F86F01C3C88BE00033745 /* WeatherLocationManager.h */,
+				A31F86F11C3C88BE00033745 /* WeatherLocationManager.m */,
 				A37A6D351C3B94AE00F76D1B /* WeatherUtilities.h */,
 				A37A6D361C3B94AE00F76D1B /* WeatherUtilities.m */,
 				A32D65051C3B4F61002E9DC3 /* FileUtilities.h */,
 				A32D65061C3B4F61002E9DC3 /* FileUtilities.m */,
+				A31F86ED1C3C7D5A00033745 /* NetworkManager.h */,
+				A31F86EE1C3C7D5A00033745 /* NetworkManager.m */,
 				A388CA8E1C3A2AFB0083EE8C /* UIFont+Extended.h */,
 				A388CA8F1C3A2AFB0083EE8C /* UIFont+Extended.m */,
 				A388CA891C3A28BA0083EE8C /* UIColor+Extended.h */,
@@ -174,6 +185,7 @@
 		DC1643CD71815EABF2D6207D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A31F86F31C3C8FD900033745 /* CoreLocation.framework */,
 				24EF71F560A29DE1C8B1984F /* libPods.a */,
 			);
 			name = Frameworks;
@@ -316,12 +328,14 @@
 				A32D65071C3B4F61002E9DC3 /* FileUtilities.m in Sources */,
 				A375BDBF1C39ECAF004D4182 /* WeatherViewController.m in Sources */,
 				A388CA901C3A2AFB0083EE8C /* UIFont+Extended.m in Sources */,
+				A31F86F21C3C88BE00033745 /* WeatherLocationManager.m in Sources */,
 				A32D64FE1C3B4AF6002E9DC3 /* Weather.m in Sources */,
 				A388CA8B1C3A28BA0083EE8C /* UIColor+Extended.m in Sources */,
 				A375BDAE1C39EC5E004D4182 /* main.m in Sources */,
 				A32D65021C3B4AF6002E9DC3 /* Time.m in Sources */,
 				A32D64FF1C3B4AF6002E9DC3 /* Day+CoreDataProperties.m in Sources */,
 				A32D64FD1C3B4AF6002E9DC3 /* Weather+CoreDataProperties.m in Sources */,
+				A31F86EF1C3C7D5A00033745 /* NetworkManager.m in Sources */,
 				A32D65011C3B4AF6002E9DC3 /* Time+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

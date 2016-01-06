@@ -17,7 +17,7 @@
     NSData *dataFile = [NSData dataWithContentsOfFile:filePath];
     NSDictionary *serializedJSONData = [NSJSONSerialization JSONObjectWithData:dataFile options:kNilOptions error:nil];
     
-    NSLog(@"JSON Data: %@", serializedJSONData);
+    //NSLog(@"JSON Data: %@", serializedJSONData);
     
     return serializedJSONData;
 }

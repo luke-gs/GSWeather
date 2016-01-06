@@ -53,6 +53,7 @@
 
     
     NSArray *sortedDailyWeather = [self.dailyWeather sortedArrayUsingDescriptors:@[sortDescriptor]];
+
     return sortedDailyWeather;
 	
 }

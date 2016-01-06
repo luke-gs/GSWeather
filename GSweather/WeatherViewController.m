@@ -12,6 +12,8 @@
 #import "FileUtilities.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import "Day.h"
+#import "NetworkManager.h"
+#import "WeatherLocationManager.h"
 #import "Weather.h"
 #import "WeatherUtilities.h"
 #import "Time.h"
@@ -31,6 +33,7 @@ static NSString *const ReuseIdentifier = @"weatherCell";
 @property (strong,nonatomic) UITableView *tabel;
 
 @property (strong, nonatomic) Weather *weather;
+@property (strong,nonatomic) WeatherLocationManager *weatherLocationManager;
 
 @end
 
@@ -40,8 +43,9 @@ static NSString *const ReuseIdentifier = @"weatherCell";
 #pragma  mark - Setup
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.weatherLocationManager = [WeatherLocationManager sharedManager];
     [self setNeedsStatusBarAppearanceUpdate];
-    [self fetchJSONData];
+    [self fetchRemoteJSON];
     [self setupViews];
     
     
@@ -224,7 +228,8 @@ static NSString *const ReuseIdentifier = @"weatherCell";
     {
         [self setupViews];
     }
-    self.titleLabel.text = [NSString stringWithFormat:@"%@",self.weather.timeZone];
+    NSArray *seperatedStrings = [self.weather.timeZone componentsSeparatedByString:@"/"];
+    self.titleLabel.text = [[NSString stringWithFormat:@"%@",[seperatedStrings lastObject]] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
     self.sunImageView.image = [UIImage imageNamed:self.weather.currentTime.icon];
     self.weatherLabel.text =
     [NSString stringWithFormat:@"%.1f°",[WeatherUtilities farenheitToCelcius:[self.weather.currentTime.temperature doubleValue]]];
@@ -252,6 +257,7 @@ static NSString *const ReuseIdentifier = @"weatherCell";
         return [[self.weather.dailyWeather allObjects] count];
 }
 
+//method that will fetch the JSON data from a file in the app itself  - NO networking
 -(void) fetchJSONData
 {
     //fetch the data from a file (using helper class)
@@ -273,6 +279,29 @@ static NSString *const ReuseIdentifier = @"weatherCell";
         [self updateWeatherDataFields];
     }];
 
+}
+
+-(void) fetchRemoteJSON
+{
+    __weak WeatherViewController *weakSelf = self;
+    
+    [[NetworkManager sharedManager]fetchWeatherDataWithCurrentLocationWithCompletionHandler:^(NSDictionary *weatherData, NSError *error) {
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            
+            //clear previous weather objects
+            [Weather MR_truncateAllInContext:localContext];
+            
+            //create the weather entity
+            //self.weather = [[Weather alloc]init];
+            [Weather weatherFromDictionary:weatherData inContext:localContext];
+            
+        } completion:^(BOOL contextDidSave, NSError *error) {
+            
+            //set the value of the weather to be the weather data from the core data
+            weakSelf.weather = [Weather MR_findFirst];
+            [weakSelf updateWeatherDataFields];
+        }];
+    }];
 }
 
 /*
